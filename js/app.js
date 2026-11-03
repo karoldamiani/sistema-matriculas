@@ -4,6 +4,8 @@ class App extends React.Component {
     this.state = {
       carregando: true,
       erro: null,
+      perfil: 'instituicao', 
+      alunoId: 1,          
       disciplinas: [],
       professores: [],
       alunos: [],
@@ -11,10 +13,20 @@ class App extends React.Component {
       matriculas: [],
     };
     this.carregarDados = this.carregarDados.bind(this);
+    this.trocarPerfil = this.trocarPerfil.bind(this);
+    this.trocarAluno = this.trocarAluno.bind(this);
   }
 
   componentDidMount() {
     this.carregarDados();
+  }
+
+  trocarPerfil(perfil) {
+    this.setState({ perfil });
+  }
+
+  trocarAluno(alunoId) {
+    this.setState({ alunoId });
   }
 
   async carregarDados() {
@@ -35,25 +47,41 @@ class App extends React.Component {
       console.error(erro);
       this.setState({
         carregando: false,
-        erro: 'Não foi possível carregar os dados.',
+        erro: 'Não foi possível carregar os dados. O json-server está rodando?',
       });
     }
   }
 
   render() {
-    const { carregando, erro, turmas } = this.state;
+    const {
+      carregando, erro, perfil, alunoId,
+      disciplinas, professores, alunos, turmas, matriculas,
+    } = this.state;
 
+    const dados = { disciplinas, professores, alunos, turmas, matriculas };
+    const valorContexto = {
+      perfil,
+      alunoId,
+      trocarPerfil: this.trocarPerfil,
+      trocarAluno: this.trocarAluno,
+    };
+
+    let conteudo;
     if (carregando) {
-      return <p className="container mt-4">Carregando...</p>;
+      conteudo = <p>Carregando...</p>;
+    } else if (erro) {
+      conteudo = <div className="alert alert-danger">{erro}</div>;
+    } else if (perfil === 'instituicao') {
+      conteudo = <PainelInstituicao {...dados} recarregar={this.carregarDados} />;
+    } else {
+      conteudo = <PainelAluno {...dados} recarregar={this.carregarDados} />;
     }
-    if (erro) {
-      return <div className="container mt-4 alert alert-danger">{erro}</div>;
-    }
+
     return (
-      <div className="container mt-4">
-        <h1>Sistema de Matrículas</h1>
-        <p>Foram carregadas {turmas.length} turmas.</p>
-      </div>
+      <UsuarioContext.Provider value={valorContexto}>
+        <Navbar alunos={alunos} />
+        <div className="container mt-4">{conteudo}</div>
+      </UsuarioContext.Provider>
     );
   }
 }
