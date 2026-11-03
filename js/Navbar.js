@@ -1,6 +1,5 @@
 class Navbar extends React.Component {
   render() {
-    // Lê o valor global do Context
     const { perfil, alunoId, trocarPerfil, trocarAluno } = this.context;
     const { alunos } = this.props;
 
