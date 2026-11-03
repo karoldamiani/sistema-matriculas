@@ -70,13 +70,6 @@
       "professorId": 3,
       "horario": "21",
       "vagas": 25
-    },
-    {
-      "disciplinaId": 4,
-      "professorId": 2,
-      "horario": "53",
-      "vagas": 20,
-      "id": 4
     }
   ],
   "matriculas": []
