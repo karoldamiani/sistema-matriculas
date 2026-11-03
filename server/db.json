@@ -82,6 +82,11 @@
       "alunoId": 2,
       "turmaId": 2,
       "id": 2
+    },
+    {
+      "alunoId": 3,
+      "turmaId": 3,
+      "id": 3
     }
   ]
 }
