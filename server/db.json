@@ -72,5 +72,16 @@
       "vagas": 25
     }
   ],
-  "matriculas": []
+  "matriculas": [
+    {
+      "alunoId": 1,
+      "turmaId": 2,
+      "id": 1
+    },
+    {
+      "alunoId": 2,
+      "turmaId": 2,
+      "id": 2
+    }
+  ]
 }
