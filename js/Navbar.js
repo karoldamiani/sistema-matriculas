@@ -6,7 +6,7 @@ class Navbar extends React.Component {
     return (
       <nav className="navbar navbar-dark bg-dark">
         <div className="container">
-          <span className="navbar-brand">🎓 Sistema de Matrículas</span>
+          <span className="navbar-brand">Sistema de Matrículas</span>
 
           <div className="d-flex gap-2 align-items-center">
             <div className="btn-group">
